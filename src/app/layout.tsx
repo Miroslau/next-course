@@ -1,5 +1,7 @@
 import React from 'react';
 import '../styles/globals.css';
+import Navigation from '../components/navigation/index';
+import Provider from '../components/provider/index';
 
 export const metadata = {
   title: 'VironIT Blog',
@@ -14,11 +16,16 @@ const RootLayout: React.FC<Props> = ({ children }) => {
   return (
     <html lang='en'>
       <body>
-        <div className='main'>
-          <div className='gradient'></div>
-        </div>
+        <Provider>
+          <div className='main'>
+            <div className='gradient'></div>
+          </div>
 
-        <main className='app'>{children}</main>
+          <main className='app'>
+            <Navigation />
+            {children}
+          </main>
+        </Provider>
       </body>
     </html>
   );

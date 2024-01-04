@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Feed from '@/components/feed';
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
         and hard skills reading good advices from our colleagues! Create and
         share creative advices!
       </p>
-      {/* Feed */}
+      <Feed />
     </section>
   );
 }
