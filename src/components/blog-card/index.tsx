@@ -1,14 +1,26 @@
 import React, { FC, useState } from 'react';
 import { IPost } from '@/models/post.interface';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface BlogCardProps {
   post: IPost;
-  handleTagClick: (args?: any) => void;
+  handleTagClick?: (args?: any) => void;
+  handleEdit?: (args?: void) => void;
+  handleDelete?: (post: IPost) => void;
 }
 
-const BlogCard: FC<BlogCardProps> = ({ post, handleTagClick }) => {
+const BlogCard: FC<BlogCardProps> = ({
+  post,
+  handleTagClick,
+  handleEdit,
+  handleDelete,
+}) => {
   const [copied, setCopied] = useState<string>('');
+  const { data: session } = useSession();
+  const pathName = usePathname();
+  const router = useRouter();
 
   const handleCopy = () => {
     setCopied(post.description);
@@ -16,10 +28,21 @@ const BlogCard: FC<BlogCardProps> = ({ post, handleTagClick }) => {
     setTimeout(() => setCopied(''), 3000);
   };
 
+  const handleProfileClick = () => {
+    if (post.user.id === session.user.id) {
+      return router.push('/profile');
+    }
+
+    router.push(`/profile/${post.user.id}?name=${post.user?.name}`);
+  };
+
   return (
     <div className='prompt_card'>
       <div className='flex items-start justify-between gap-5'>
-        <div className='flex flex-1 cursor-pointer items-center justify-start gap-3'>
+        <div
+          className='flex flex-1 cursor-pointer items-center justify-start gap-3'
+          onClick={handleProfileClick}
+        >
           <Image
             width={40}
             height={40}
@@ -57,6 +80,19 @@ const BlogCard: FC<BlogCardProps> = ({ post, handleTagClick }) => {
       >
         #{post.tag}
       </p>
+      {session?.user?.id === post.user.id && pathName === '/profile' && (
+        <div className='flex-center border-grey-100 mt-5 gap-4 border-t pt-3'>
+          <p className='green_gradient cursor-pointer font-inter text-sm'>
+            Edit
+          </p>
+          <p
+            className='orange_gradient cursor-pointer font-inter text-sm'
+            onClick={handleDelete && handleDelete.bind(this, post)}
+          >
+            Delete
+          </p>
+        </div>
+      )}
     </div>
   );
 };
