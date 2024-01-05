@@ -6,7 +6,7 @@ import { IPost } from '@/models/post.interface';
 const Feed = () => {
   const [searchText, setSearchText] = useState<string>('');
   const [posts, setPosts] = useState<IPost[]>([]);
-  const [searchedResults, setSearchResults] = useState<IPost[]>([]);
+  const [searchedResults, setSearchedResults] = useState<IPost[]>([]);
   const [searchTimeOut, setSearchTimeOut] = useState<any>(null);
 
   const fetchPosts = async () => {
@@ -38,11 +38,15 @@ const Feed = () => {
     setSearchTimeOut(
       setTimeout(() => {
         const searchResult = filterPosts(event.target.value);
-        setSearchResults(searchResult);
+        setSearchedResults(searchResult);
       }, 500)
     );
   };
-  const handleTagClick = () => {};
+  const handleTagClick = (tagName: string) => {
+    setSearchText(tagName);
+    const searchResult = filterPosts(tagName);
+    setSearchedResults(searchResult);
+  };
 
   return (
     <section className='feed'>
