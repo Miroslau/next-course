@@ -5,5 +5,15 @@
       "username": "Miraslau Rabikau",
       "email": "m.rabikau.vironit@gmail.com"
     }
+  ],
+  "posts": [
+    {
+      "userId": "105907100728083500389",
+      "tag": "#image",
+      "description": "Test with image need to add image",
+      "image": "/uploads/IMG_0128.jpeg",
+      "date": "2024-01-05T12:25:34.633Z",
+      "id": 1
+    }
   ]
 }

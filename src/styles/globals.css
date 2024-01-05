@@ -131,6 +131,10 @@
     @apply w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0;
 }
 
+.form_input_file {
+    @apply w-full flex flex-col items-center justify-center aspect-video rounded-lg mt-2 p-3 text-sm text-gray-500 border border-dashed border-gray-300 cursor-pointer
+}
+
 /* Nav Component */
 .logo_text {
     @apply max-sm:hidden font-satoshi font-semibold text-lg text-black tracking-wide;
