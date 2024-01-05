@@ -36,6 +36,10 @@ const BlogCard: FC<BlogCardProps> = ({
     router.push(`/profile/${post.user.id}?name=${post.user?.name}`);
   };
 
+  const handlePostPage = (post: IPost) => {
+    router.push(`/post/${post.id}`);
+  };
+
   return (
     <div className='prompt_card'>
       <div className='flex items-start justify-between gap-5'>
@@ -79,6 +83,12 @@ const BlogCard: FC<BlogCardProps> = ({
         onClick={handleTagClick && handleTagClick.bind(this, post.tag)}
       >
         #{post.tag}
+      </p>
+      <p
+        className='blue_gradient cursor-pointer pt-2 font-inter text-sm'
+        onClick={handlePostPage.bind(this, post)}
+      >
+        Details
       </p>
       {session?.user?.id === post.user.id && pathName === '/profile' && (
         <div className='flex-center border-grey-100 mt-5 gap-4 border-t pt-3'>
