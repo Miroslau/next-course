@@ -4,4 +4,5 @@ export interface IPost {
   description: string;
   date?: Date;
   image: File | null;
+  user?: IUser;
 }
