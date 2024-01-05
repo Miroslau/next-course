@@ -12,6 +12,7 @@ const CreatePost = () => {
   const [post, setPost] = useState<IPost>({
     tag: '',
     description: '',
+    image: null,
   });
   const { data: session } = useSession();
   const router = useRouter();
@@ -27,10 +28,31 @@ const CreatePost = () => {
     [post]
   );
 
+  const uploadImage = useCallback(
+    (file: File) => {
+      setPost({
+        ...post,
+        image: file,
+      });
+    },
+    [post]
+  );
+
   const createPost = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     setSubmiting(true);
     try {
+      const formDataWithImage = new FormData();
+      // @ts-ignore
+      formDataWithImage.set('image', post.image);
+
+      const responseImg = await fetch('/api/upload', {
+        method: 'POST',
+        body: formDataWithImage,
+      });
+
+      const { filePath } = await responseImg.json();
+
       const response = await fetch('/api/post/add-post', {
         method: 'POST',
         headers: {
@@ -41,8 +63,10 @@ const CreatePost = () => {
           tag: post.tag,
           // @ts-ignore
           userId: session?.user['id'],
+          image: filePath,
         }),
       });
+
       if (response.ok) {
         router.push('/');
       }
@@ -60,6 +84,7 @@ const CreatePost = () => {
       submiting={submiting}
       handleChange={handleChange}
       handleSubmit={createPost}
+      inputUpload={uploadImage}
       inputs={postForm}
     />
   );

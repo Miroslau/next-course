@@ -3,11 +3,13 @@ import { IInput } from '@/models/input.interface';
 import TextInput from '@/components/form/text-input';
 import Link from 'next/link';
 import TextareaInput from '@/components/form/textarea-input';
+import FileInput from '@/components/form/file-input';
 interface FormProps<A> {
   type: string;
   model: A;
   handleSubmit: (args?: any) => void;
   handleChange: (args?: any) => void;
+  inputUpload: (args?: any) => void;
   submiting: boolean;
   inputs: IInput[];
 }
@@ -19,6 +21,8 @@ const DynamicComponent = (input: IInput): React.FC | React.Component | any => {
       return TextInput;
     case 'textarea':
       return TextareaInput;
+    case 'file':
+      return FileInput;
     default:
       return TextInput;
   }
@@ -31,6 +35,7 @@ const Form: FC<FormProps<any>> = ({
   submiting,
   inputs,
   handleChange,
+  inputUpload,
 }) => {
   return (
     <section className='flex-start w-full max-w-full flex-col'>
@@ -57,6 +62,7 @@ const Form: FC<FormProps<any>> = ({
               variant={input.variant}
               required={input.required}
               inputText={handleChange}
+              inputUpload={inputUpload}
               label={input.title}
               placeholder={input.placeholder}
               autocomplete={input.autocomplete}

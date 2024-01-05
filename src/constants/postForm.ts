@@ -21,4 +21,14 @@ export const postForm: IInput[] = [
     type: 'text',
     autocomplete: 'off',
   },
+  {
+    id: 3,
+    title: 'Click in ths area',
+    model: 'image',
+    placeholder: 'image',
+    required: true,
+    variant: '',
+    type: 'file',
+    autocomplete: 'off',
+  },
 ];

@@ -1,13 +1,14 @@
 import axios from 'axios';
 
 export const POST = async (request: any) => {
-  const { userId, tag, description } = await request.json();
+  const { userId, tag, description, image } = await request.json();
 
   try {
     const response = await axios.post(`${process.env.SERVER}/posts`, {
       userId: userId,
       tag: tag,
       description: description,
+      image: image,
       date: new Date(),
     });
 
