@@ -5,5 +5,27 @@
       "username": "Miraslau Rabikau",
       "email": "m.rabikau.vironit@gmail.com"
     }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "tag": "#tag",
+      "description": "test fdfdf",
+      "date": "12-10-2024"
+    },
+    {
+      "userId": "105907100728083500389",
+      "tag": "#Test #idea #blabla",
+      "description": "new tst for me",
+      "date": "2024-01-05T09:20:39.983Z",
+      "id": 2
+    },
+    {
+      "userId": "105907100728083500389",
+      "tag": "#MyTest",
+      "description": "New test hehehe",
+      "date": "2024-01-05T09:22:32.282Z",
+      "id": 3
+    }
   ]
 }
