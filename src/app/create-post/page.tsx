@@ -61,8 +61,7 @@ const CreatePost = () => {
         body: JSON.stringify({
           description: post.description,
           tag: post.tag,
-          // @ts-ignore
-          userId: session?.user['id'],
+          user: session?.user,
           image: filePath,
         }),
       });

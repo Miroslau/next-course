@@ -15,7 +15,6 @@ export async function POST(request: NextRequest) {
 
   const path = join(process.cwd(), 'public', 'uploads', file.name);
   await writeFile(path, buffer);
-  console.log(`open ${path} to se image`);
 
   return NextResponse.json({
     success: true,
