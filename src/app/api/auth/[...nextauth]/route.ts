@@ -31,7 +31,7 @@ const handler = NextAuth({
       try {
         const formData: IUser = {
           id: profile && profile.sub?.toString(),
-          username: profile && profile?.name,
+          name: profile && profile?.name,
           email: profile && profile?.email,
           image: profile && profile?.image,
         };
