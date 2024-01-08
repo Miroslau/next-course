@@ -29,11 +29,18 @@ const BlogCard: FC<BlogCardProps> = ({
   };
 
   const handleProfileClick = () => {
-    if (post.user.id === session.user.id) {
+    if (
+      post.user &&
+      session &&
+      session.user &&
+      // @ts-ignore
+      post.user.id === session?.user.id
+    ) {
       return router.push('/profile');
     }
-
-    router.push(`/profile/${post.user.id}?name=${post.user?.name}`);
+    if (post && post.user) {
+      router.push(`/profile/${post.user.id}?name=${post.user?.name}`);
+    }
   };
 
   const handlePostPage = (post: IPost) => {
@@ -90,19 +97,22 @@ const BlogCard: FC<BlogCardProps> = ({
       >
         Details
       </p>
-      {session?.user?.id === post.user.id && pathName === '/profile' && (
-        <div className='flex-center border-grey-100 mt-5 gap-4 border-t pt-3'>
-          <p className='green_gradient cursor-pointer font-inter text-sm'>
-            Edit
-          </p>
-          <p
-            className='orange_gradient cursor-pointer font-inter text-sm'
-            onClick={handleDelete && handleDelete.bind(this, post)}
-          >
-            Delete
-          </p>
-        </div>
-      )}
+      {post &&
+        post.user &&
+        session?.user?.id === post.user.id &&
+        pathName === '/profile' && (
+          <div className='flex-center border-grey-100 mt-5 gap-4 border-t pt-3'>
+            <p className='green_gradient cursor-pointer font-inter text-sm'>
+              Edit
+            </p>
+            <p
+              className='orange_gradient cursor-pointer font-inter text-sm'
+              onClick={handleDelete && handleDelete.bind(this, post)}
+            >
+              Delete
+            </p>
+          </div>
+        )}
     </div>
   );
 };
