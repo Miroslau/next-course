@@ -44,7 +44,7 @@ const BlogCard: FC<BlogCardProps> = ({
   };
 
   const handlePostPage = (post: IPost) => {
-    router.push(`/post/${post.id}`);
+    router.push(`/blog-post/${post.id}`);
   };
 
   return (

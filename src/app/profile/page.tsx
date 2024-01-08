@@ -13,9 +13,8 @@ const MyProfile = () => {
   const handleEdit = () => {};
 
   const handleDelete = async (post: IPost) => {
-    console.log('post: ', post);
     const hasConfirmed = confirm(
-      'Are you shure you want to delete this post ?'
+      'Are you shure you want to delete this blog-post ?'
     );
 
     if (hasConfirmed) {
