@@ -5,7 +5,7 @@ export const postForm: IInput[] = [
     id: 1,
     title: 'Your Post',
     model: 'description',
-    placeholder: 'Write your post here',
+    placeholder: 'Write your blog-post here',
     required: true,
     variant: 'outline',
     type: 'textarea',
