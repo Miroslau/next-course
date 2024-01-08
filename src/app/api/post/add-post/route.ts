@@ -12,10 +12,10 @@ export const POST = async (request: any) => {
       date: new Date(),
     });
 
-    return new Response('The post has been creates successfully', {
+    return new Response('The blog-post has been creates successfully', {
       status: 201,
     });
   } catch (error) {
-    return new Response('Failed to create a new post', { status: 500 });
+    return new Response('Failed to create a new blog-post', { status: 500 });
   }
 };
