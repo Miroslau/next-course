@@ -15,10 +15,14 @@ const Feed = () => {
   const [currentPosts, setCurrentPosts] = useState<IPost[]>([]);
 
   const fetchPosts = async () => {
-    const resp = await fetch('/api/post');
-    const { response } = await resp.json();
+    try {
+      const resp = await fetch('/api/post');
+      const { response } = await resp.json();
 
-    setPosts(response);
+      setPosts(response);
+    } catch (error) {
+      console.error('Post has not been fetched');
+    }
   };
 
   useEffect(() => {
@@ -76,10 +80,12 @@ const Feed = () => {
           className='search_input peer'
         />
       </form>
-      {searchText ? (
-        <PostList posts={searchedResults} handleTagClick={handleTagClick} />
-      ) : (
-        <PostList posts={currentPosts} handleTagClick={handleTagClick} />
+
+      {(searchedResults.length > 0 || posts.length > 0) && (
+        <PostList
+          posts={searchText ? searchedResults : posts}
+          handleTagClick={handleTagClick}
+        />
       )}
       {(searchedResults.length > 0 || posts.length > 0) && (
         <PaginationControl
@@ -87,6 +93,9 @@ const Feed = () => {
           data={searchText ? searchedResults : posts}
           handlePageChange={handlePageChange}
         />
+      )}
+      {!searchedResults.length && !posts.length && (
+        <div>Please add some posts</div>
       )}
     </section>
   );
