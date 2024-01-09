@@ -4,7 +4,7 @@ import PostList from '@/components/post-list';
 import { IPost } from '@/models/post.interface';
 import PaginationControl from '@/components/pagination-control';
 
-const itemsPerPage = 5;
+const itemsPerPage = 1;
 
 const Feed = () => {
   const [searchText, setSearchText] = useState<string>('');
@@ -83,7 +83,7 @@ const Feed = () => {
 
       {(searchedResults.length > 0 || posts.length > 0) && (
         <PostList
-          posts={searchText ? searchedResults : posts}
+          posts={searchText ? searchedResults : currentPosts}
           handleTagClick={handleTagClick}
         />
       )}
